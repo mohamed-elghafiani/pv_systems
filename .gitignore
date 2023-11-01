@@ -1,0 +1,5 @@
+# data folder
+data1/
+
+# Data files
+*.mat
