@@ -2,5 +2,6 @@
 
 import scipy.io as sio
 
-data = sio.loadmat("data1/sans_defaut/1/data.mat")
-print(data["tout"].shape)
+data = sio.loadmat("V_DATA.mat")
+print(data.keys())
+print(data["OM_1"].shape)
