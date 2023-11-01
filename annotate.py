@@ -22,5 +22,5 @@ an = {
 # sio.savemat('an_I_data.mat', data)
 
 new_data = sio.loadmat('an_I_data.mat')
-
+print()
 print(new_data['RS_1'][0])
