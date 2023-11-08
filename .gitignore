@@ -1,5 +1,13 @@
+__pycache__/
+
 # data folder
 data/
+matlab/
 
 # Data files
 *.mat
+
+venv/
+
+checkpoint0/
+
