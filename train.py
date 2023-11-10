@@ -13,8 +13,8 @@ def train_once_data(num):
     Iter = 1234
 
     torch.manual_seed(Iter)
-    EPOCH = 100
-    LR = 0.0001
+    EPOCH = 1000
+    LR = 0.001
 
     model = Model()
 
@@ -76,8 +76,8 @@ def train_once_data(num):
         model.train()
         train_MAE = 0.
         train_MAE_PER = 0.
-        for batch_idx, (b_x, b_y) in enumerate(loader()[1]):
-            output = model(b_x.float())
+        for batch_idx, (b_i, b_v, b_y) in enumerate(loader()[1]):
+            output = model(b_i, b_v)
 
             # MAE = torch.mean(torch.square(output-b_y))
             loss_fn = nn.CrossEntropyLoss()
@@ -94,8 +94,8 @@ def train_once_data(num):
         test_MAE = 0.
         test_MAE_PER = 0.
         with torch.no_grad():
-            for batch_idx, (b_x, b_y) in enumerate(loader()[0]):
-                test_output = model(b_x.float())
+            for batch_idx, (b_i, b_v, b_y) in enumerate(loader()[0]):
+                test_output = model(b_i, b_v)
 
                 test_loss_fn = nn.CrossEntropyLoss()
                 test_loss = test_loss_fn(test_output, b_y)

@@ -6,22 +6,25 @@ from sklearn.model_selection import train_test_split
 
 
 def loader():
-    BATCH_SIZE = 64
+    BATCH_SIZE = 16
     
-    data = sio.loadmat("matlab/data.mat")["shuffled_data"][:,::2]
+    data = sio.loadmat("matlab/data.mat")["shuffled_data"]
     train_data, test_data = train_test_split(data, test_size=.2)
 
     # transform list of lists to torch tensor
     def to_tensor(data_):
-        data = []
+        data_I = []
+        data_V = []
         data_label = []
         for el in data_:
-            data.append(list(el[0][0]))
-            data_label.append(list(el[1][0]))
+            data_I.append(list(el[0][0]))
+            data_V.append(list(el[1][0]))
+            data_label.append(list(el[2][0]))
 
-        data = torch.tensor(data, dtype=torch.float32)
+        data_I = torch.tensor(data_I, dtype=torch.float32)
+        data_V = torch.tensor(data_V, dtype=torch.float32)
         data_label = torch.tensor(data_label, dtype=torch.float32)
-        tr_data = TensorDataset(data, data_label)
+        tr_data = TensorDataset(data_I, data_V, data_label)
         return tr_data
 
     train_data = to_tensor(train_data)
