@@ -3,6 +3,7 @@ import torch
 from model import Model
 import os
 
+torch.set_printoptions(precision=5)
 
 data = loader()[0]
 

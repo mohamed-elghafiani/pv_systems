@@ -34,7 +34,10 @@ class Model(nn.Module):
         self.r3 = nn.ReLU()
         self.layer4 = nn.Linear(1000, 1000)
         self.r4 = nn.ReLU()
+        self.layer5 = nn.Linear(1000, 1000)
+        self.r5 = nn.ReLU()
         self.output = nn.Linear(1000, 4)
+        self.soft_max = nn.Softmax()
 
     def forward(self, x, y):
         i1 = self.inputI(x)
@@ -66,7 +69,11 @@ class Model(nn.Module):
         iv_h3 = self.r3(iv_h3)
         iv_h4 = self.layer4(iv_h3)
         iv_h4 = self.r4(iv_h4)
-
-        out = self.output(iv_h4)
+        iv_h5 = self.layer4(iv_h4)
+        iv_h5 = self.r4(iv_h5)
+        iv_h6 = self.layer4(iv_h5)
+        iv_h6 = self.r4(iv_h6)
+        out = self.output(iv_h6)
+        out = self.soft_max(out)
 
         return out

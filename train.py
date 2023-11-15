@@ -14,7 +14,7 @@ def train_once_data(num):
 
     torch.manual_seed(Iter)
     EPOCH = 1000
-    LR = 0.001
+    LR = 0.005
 
     model = Model()
 
@@ -26,6 +26,7 @@ def train_once_data(num):
 
     opt = torch.optim.SGD(model.parameters(), lr=LR,
                           momentum=0.9, weight_decay=1e-08)
+    # opt = torch.optim.Adam(model.parameters(), lr=LR)
 
     save_dir = os.path.join(os.getcwd(), f'checkpoint{num}')
 
@@ -61,7 +62,7 @@ def train_once_data(num):
             torch.save(state, save_dir + (f'/model_best_{epoch}.pth.tar'))
 
     def adjust_learning_rate(optimizer, epoch, start_lr):
-        lr = start_lr * (0.1 ** (epoch // 100))
+        lr = start_lr * (0.5 ** (epoch // 10))
         for param_group in optimizer.param_groups:
             param_group['lr'] = lr
 
@@ -71,7 +72,7 @@ def train_once_data(num):
 
     model = model.float()
     for epoch in range(START_EPOCH, EPOCH):
-        # adjust_learning_rate(opt, epoch, LR)
+        adjust_learning_rate(opt, epoch, LR)
     
         model.train()
         train_MAE = 0.
