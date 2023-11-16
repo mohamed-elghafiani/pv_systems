@@ -14,7 +14,7 @@ def train_once_data(num):
 
     torch.manual_seed(Iter)
     EPOCH = 1000
-    LR = 0.005
+    LR = 0.01
 
     model = Model()
 
@@ -25,7 +25,7 @@ def train_once_data(num):
     model.to(DEVICE)
 
     opt = torch.optim.SGD(model.parameters(), lr=LR,
-                          momentum=0.9, weight_decay=1e-08)
+                        momentum=0.9, weight_decay=1e-08)
     # opt = torch.optim.Adam(model.parameters(), lr=LR)
 
     save_dir = os.path.join(os.getcwd(), f'checkpoint{num}')
@@ -79,6 +79,9 @@ def train_once_data(num):
         train_MAE_PER = 0.
         for batch_idx, (b_i, b_v, b_y) in enumerate(loader()[1]):
             output = model(b_i, b_v)
+
+            # print(output)
+            # break    
 
             # MAE = torch.mean(torch.square(output-b_y))
             loss_fn = nn.CrossEntropyLoss()

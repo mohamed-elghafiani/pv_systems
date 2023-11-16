@@ -6,10 +6,10 @@ from sklearn.model_selection import train_test_split
 
 
 def loader():
-    BATCH_SIZE = 16
+    BATCH_SIZE = 128
     
     # data = sio.loadmat("matlab/data.mat")["shuffled_data"]
-    data = sio.loadmat("data_norm.mat")["data"]
+    data = sio.loadmat("data.mat")["data"]
     train_data, test_data = train_test_split(data, test_size=.2)
 
     # transform list of lists to torch tensor
