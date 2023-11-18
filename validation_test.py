@@ -6,7 +6,7 @@ import sys
 
 model = Model()
 
-data = sio.loadmat('data/matlab.mat')
+data = sio.loadmat('data/val.mat')
 
 model_filenam = os.listdir(os.getcwd() + "/checkpoint0")[2]
 model_dir = os.getcwd() + f"/checkpoint0/{model_filenam}"
