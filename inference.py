@@ -18,11 +18,10 @@ model.load_state_dict(checkpoint['state_dict'])
 
 pred, labels = [], []
 for (b_i, b_v, b_y) in data:
-    pred.append(model(b_i, b_v))
-    labels.append(b_y)
+    print((torch.max(torch.exp(model(b_i, b_v)), 1)[1]))
 
-pred = torch.cat(pred, dim=0)
-labels = torch.cat(labels, dim=0)
+    pred.append(model(b_i, b_v).detach().numpy())
+    labels.append(b_y.detach().numpy())
 
 print(pred[1])
 print(labels[1])

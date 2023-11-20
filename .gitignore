@@ -11,3 +11,6 @@ venv/
 
 checkpoint0/
 
+# Images
+*.png
+
